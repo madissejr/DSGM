@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MultaViewDlg" widgetVar="MultaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMultaTitle}">
+            <h:form id="MultaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{multaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMultaLabel_idmulta}"/>
+                        <h:outputText value="#{multaController.selected.idmulta}" title="#{bundle.ViewMultaTitle_idmulta}"/>
+                        <h:outputText value="#{bundle.ViewMultaLabel_dia}"/>
+                        <h:outputText value="#{multaController.selected.dia}" title="#{bundle.ViewMultaTitle_dia}"/>
+                        <h:outputText value="#{bundle.ViewMultaLabel_condutor}"/>
+                        <h:outputText value="#{multaController.selected.condutor}" title="#{bundle.ViewMultaTitle_condutor}"/>
+                        <h:outputText value="#{bundle.ViewMultaLabel_emissor}"/>
+                        <h:outputText value="#{multaController.selected.emissor}" title="#{bundle.ViewMultaTitle_emissor}"/>
+                        <h:outputText value="#{bundle.ViewMultaLabel_infracao}"/>
+                        <h:outputText value="#{multaController.selected.infracao}" title="#{bundle.ViewMultaTitle_infracao}"/>
+                        <h:outputText value="#{bundle.ViewMultaLabel_veiculo}"/>
+                        <h:outputText value="#{multaController.selected.veiculo}" title="#{bundle.ViewMultaTitle_veiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MultaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

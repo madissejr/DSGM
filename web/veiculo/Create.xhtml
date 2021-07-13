@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VeiculoCreateDlg" widgetVar="VeiculoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVeiculoTitle}">
+            <h:form id="VeiculoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{veiculoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVeiculoLabel_idveiculo}" for="idveiculo" />
+                        <p:inputText id="idveiculo" value="#{veiculoController.selected.idveiculo}" title="#{bundle.CreateVeiculoTitle_idveiculo}" required="true" requiredMessage="#{bundle.CreateVeiculoRequiredMessage_idveiculo}"/>
+                        <p:outputLabel value="#{bundle.CreateVeiculoLabel_marca}" for="marca" />
+                        <p:inputText id="marca" value="#{veiculoController.selected.marca}" title="#{bundle.CreateVeiculoTitle_marca}" />
+                        <p:outputLabel value="#{bundle.CreateVeiculoLabel_modelo}" for="modelo" />
+                        <p:inputText id="modelo" value="#{veiculoController.selected.modelo}" title="#{bundle.CreateVeiculoTitle_modelo}" />
+                        <p:outputLabel value="#{bundle.CreateVeiculoLabel_categoria}" for="categoria" />
+                        <p:selectOneMenu id="categoria" value="#{veiculoController.selected.categoria}" required="true" requiredMessage="#{bundle.EditVeiculoRequiredMessage_categoria}">
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"
+                                           var="categoriaItem"
+                                           itemValue="#{categoriaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{veiculoController.create}" value="#{bundle.Save}" update="display,:VeiculoListForm:datalist,:growl" oncomplete="handleSubmit(args,'VeiculoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VeiculoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

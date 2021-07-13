@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CondutorEditDlg" widgetVar="CondutorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCondutorTitle}">
+            <h:form id="CondutorEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{condutorController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCondutorLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{condutorController.selected.id}" title="#{bundle.EditCondutorTitle_id}" required="true" requiredMessage="#{bundle.EditCondutorRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditCondutorLabel_nome}" for="nome" />
+                        <p:inputText id="nome" value="#{condutorController.selected.nome}" title="#{bundle.EditCondutorTitle_nome}" required="true" requiredMessage="#{bundle.EditCondutorRequiredMessage_nome}"/>
+                        <p:outputLabel value="#{bundle.EditCondutorLabel_contacto}" for="contacto" />
+                        <p:inputTextarea rows="4" cols="30" id="contacto" value="#{condutorController.selected.contacto}" title="#{bundle.EditCondutorTitle_contacto}" required="true" requiredMessage="#{bundle.EditCondutorRequiredMessage_contacto}"/>
+                        <p:outputLabel value="#{bundle.EditCondutorLabel_categoria}" for="categoria" />
+                        <p:selectOneMenu id="categoria" value="#{condutorController.selected.categoria}" required="true" requiredMessage="#{bundle.EditCondutorRequiredMessage_categoria}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"
+                                           var="categoriaItem"
+                                           itemValue="#{categoriaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCondutorLabel_endereco}" for="endereco" />
+                        <p:selectOneMenu id="endereco" value="#{condutorController.selected.endereco}" required="true" requiredMessage="#{bundle.EditCondutorRequiredMessage_endereco}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{enderecoController.itemsAvailableSelectOne}"
+                                           var="enderecoItem"
+                                           itemValue="#{enderecoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{condutorController.update}" value="#{bundle.Save}" update="display,:CondutorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CondutorEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CondutorEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
